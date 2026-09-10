@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
-import type { TouristicRoute } from '../types'
+import type { Trajet } from '../types'
 import { resolveImage } from '../lib/images'
 
-function RouteCard({ route }: { route: TouristicRoute }) {
+function RouteCard({ route }: { route: Trajet }) {
   return (
     <div className="flex flex-col w-full h-full cursor-grab bg-gray-50 rounded-lg shadow-md">
       <div className="flex flex-col pt-2 items-center text-sky-950 font-bold justify-center w-full py-2">
-        {route.path}
+        {route.titre}
       </div>
       <div className="w-full h-full p-5 overflow-x-auto">
         <div className="flex flex-col w-[750px] md:w-full h-full">
           <div className="flex relative flex-row w-full h-full space-x-2 md:space-x-0">
             {[
-              { img: route.img_start, label: route.location_start, city: route.start_name },
-              { img: route.img_mid, label: route.location_mid, city: route.mid_name },
-              { img: route.img_end, label: route.location_end, city: route.end_name },
+              { img: route.image_1, label: route.titre_1, city: route.titre_1 },
+              { img: route.image_2, label: route.titre_2, city: route.titre_2 },
+              { img: route.image_3, label: route.titre_3, city: route.titre_3 },
             ].map((step, i) => (
               <div key={i} className="relative outline outline-6 outline-offset-2 outline-white rounded-xl overflow-hidden grow h-40">
                 <img src={resolveImage(step.img)} alt={step.label} className="absolute inset-0 w-full h-full object-cover" />
@@ -30,12 +30,12 @@ function RouteCard({ route }: { route: TouristicRoute }) {
       <div className="flex items-center justify-between px-5 py-3 border-t border-gray-200">
         <div className="text-xs text-gray-500">
           Départ <br />
-          <span className="font-medium text-gray-700">{route.frequency}</span>
+          <span className="font-medium text-gray-700">{route.depart}</span>
         </div>
         <div className="text-right">
           <div className="text-xs text-gray-500">A partir de</div>
           <div className="text-lg font-bold text-primary">
-            {route.price.toLocaleString('fr-FR')} <span className="text-xs">AR</span>
+            {route.prix.toLocaleString('fr-FR')} <span className="text-xs">{route.devise}</span>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@ function RouteCard({ route }: { route: TouristicRoute }) {
   )
 }
 
-export default function ItineraryCarousel({ routes }: { routes: TouristicRoute[] }) {
+export default function ItineraryCarousel({ routes }: { routes: Trajet[] }) {
   const [index, setIndex] = useState(0)
   const perPage = 1
 

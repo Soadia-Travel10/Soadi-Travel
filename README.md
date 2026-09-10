@@ -5,16 +5,9 @@ Application frontend React + TypeScript + TailwindCSS pour Soa Dia Travel Madaga
 ## Fonctionnalités
 
 - Site public avec accueil, itinéraires, villes, tarifs et réservation.
-- Authentification client locale depuis `/login` et `/register`.
-- Panneau d'administration local depuis `/admin/login`.
+- Authentification client et administrateur avec Supabase depuis `/login`, `/register` et `/admin/login`.
 - Gestion des plans, véhicules, villes, itinéraires, témoignages, statistiques, abonnés et réservations.
-- Les données sont stockées dans le `localStorage` du navigateur : aucune API, aucun serveur backend et aucune base de données ne sont nécessaires.
-
-## Identifiants de démonstration
-
-- Admin : `admin@soadia.mg`
-- Mot de passe : `admin123`
-- Configuration alternative : `/admin/setup` avec la clé `soadia-setup-2026`
+- La configuration Supabase est fournie par les variables `VITE_SUPABASE_URL` et `VITE_SUPABASE_PUBLISHABLE_KEY` dans `.env`.
 
 ## Développement
 

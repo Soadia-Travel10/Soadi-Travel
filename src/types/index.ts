@@ -4,6 +4,39 @@ export interface Hub {
   created_at?: string
 }
 
+export interface Ville {
+  id: string
+  nom: string
+  image: string | null
+  description: string | null
+  prix: number | null
+  created_at: string
+}
+
+export interface Partenaire {
+  id: string
+  nom: string
+  image: string | null
+  created_at: string
+}
+
+export interface VilleEmblematique {
+  id: string
+  nom: string
+  image: string | null
+  ordre: number
+  created_at: string
+}
+
+export interface NosImplementation {
+  id: string
+  nom: string
+  image: string | null
+  categorie: string | null
+  description: string | null
+  created_at: string
+}
+
 export interface Destination {
   id: number
   name: string
@@ -46,6 +79,14 @@ export interface Vehicle {
   seats: VehicleSeat[]
 }
 
+export interface VehicleType {
+  id: string
+  nom: string
+  type: string | null
+  image: string | null
+  created_at: string
+}
+
 export interface Testimonial {
   id: number
   name: string
@@ -72,6 +113,21 @@ export interface TouristicRoute {
   frequency: string
   price: number
   sort_order: number
+}
+
+export interface Trajet {
+  id: string
+  titre: string
+  depart: string
+  prix: number
+  devise: string
+  image_1: string | null
+  titre_1: string | null
+  image_2: string | null
+  titre_2: string | null
+  image_3: string | null
+  titre_3: string | null
+  created_at: string
 }
 
 export interface FeaturedCity {
@@ -111,13 +167,13 @@ export interface Reservation {
 }
 
 export interface AdminUser {
-  id: number
+  id: string
   name: string
   email: string
 }
 
 export interface User {
-  id: number
+  id: string
   name: string
   email: string
 }

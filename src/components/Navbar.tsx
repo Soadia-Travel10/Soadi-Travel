@@ -86,7 +86,7 @@ export default function Navbar() {
               </div>
             ) : (
               <Link
-                to="/login"
+                to="/admin/login"
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors h-10 px-4 py-2 bg-primary text-white hover:bg-primary/90"
               >
                 Connexion

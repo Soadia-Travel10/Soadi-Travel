@@ -1,9 +1,9 @@
 import React from 'react'
-import type { FeaturedCity } from '../types'
+import type { VilleEmblematique } from '../types'
 import { resolveImage } from '../lib/images'
 
-export default function FeaturedCitiesScroll({ cities }: { cities: FeaturedCity[] }) {
-  const doubled = [...cities, ...cities]
+export default function FeaturedCitiesScroll({ cities }: { cities: VilleEmblematique[] }) {
+  if (cities.length === 0) return null
 
   return (
     <section className="py-16 bg-white overflow-hidden">
@@ -20,34 +20,21 @@ export default function FeaturedCitiesScroll({ cities }: { cities: FeaturedCity[
         </p>
       </div>
 
-      <div className="relative w-full overflow-hidden">
-        <div className="flex animate-scroll-x gap-4 w-max">
-          {doubled.map((city, idx) => (
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+          {cities.map((city) => (
             <div
-              key={`${city.id}-${idx}`}
-              className="relative w-64 h-64 flex-shrink-0 rounded-lg overflow-hidden bg-cover bg-center group cursor-pointer transition-transform duration-500 hover:scale-105"
-              style={{ backgroundImage: `url(${resolveImage(city.image_url)})` }}
+              key={city.id}
+              className="relative h-64 rounded-xl overflow-hidden bg-cover bg-center group cursor-pointer shadow-md hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
+              style={{ backgroundImage: `url(${resolveImage(city.image)})` }}
             >
-              <div className="flex items-center justify-center w-full h-full bg-gray-800/25 group-hover:bg-gray-800/40 transition-colors">
-                <h3 className="text-2xl font-bold text-white text-center px-2">{city.title}</h3>
+              <div className="flex items-end w-full h-full p-5 bg-gradient-to-t from-sky-950/85 via-sky-950/20 to-transparent group-hover:from-sky-950/95 transition-colors">
+                <h3 className="text-2xl font-bold text-white text-center px-2">{city.nom}</h3>
               </div>
             </div>
           ))}
         </div>
       </div>
-
-      <style>{`
-        @keyframes scroll-x {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-        .animate-scroll-x {
-          animation: scroll-x 40s linear infinite;
-        }
-        .animate-scroll-x:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </section>
   )
 }
