@@ -37,7 +37,7 @@ export default function About() {
         </div>
         <div className="relative h-[400px] md:h-auto grid grid-cols-2 gap-2 p-6">
           <img src={aboutImage} alt="Soa Dia Travel" className="w-full h-full object-cover rounded-lg shadow-lg" />
-          <img src={aboutImage} alt="Soa Dia Travel" className="w-full h-full object-cover rounded-lg shadow-lg" />
+          
         </div>
       </div>
     </section>

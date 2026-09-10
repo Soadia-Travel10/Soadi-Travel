@@ -17,7 +17,7 @@ interface Props<T> {
 export default function DataTable<T>({ columns, rows, onEdit, onDelete, rowKey }: Props<T>) {
   return (
     <div className="bg-white rounded-xl shadow overflow-x-auto">
-      <table className="w-full text-sm">
+      <table className="w-full min-w-[640px] text-sm">
         <thead className="bg-gray-50 border-b">
           <tr>
             {columns.map((col) => (

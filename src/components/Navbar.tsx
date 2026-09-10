@@ -17,6 +17,11 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    setMobileOpen(false)
+    setProfileOpen(false)
+  }, [location.pathname])
+
   const solid = scrolled || !isHome
   const initials = user?.name
     .split(' ')
@@ -59,16 +64,16 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex min-h-16 items-center justify-between gap-4">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <span className={`text-xl font-mono font-bold ${solid ? 'text-blue-900' : 'text-white'}`}>
+              <span className={`truncate text-lg sm:text-xl font-mono font-bold ${solid ? 'text-blue-900' : 'text-white'}`}>
                 Soa Dia Travel
               </span>
             </Link>
           </div>
 
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -126,11 +131,12 @@ export default function Navbar() {
             )}
           </nav>
 
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Open menu"
-              className={`inline-flex items-center justify-center h-10 w-10 rounded-md ${solid ? 'text-gray-700' : 'text-white'}`}
+              aria-expanded={mobileOpen}
+              aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+              className={`inline-flex items-center justify-center h-10 w-10 rounded-lg ${solid ? 'text-gray-700 hover:bg-slate-100' : 'text-white hover:bg-white/10'}`}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="4" x2="20" y1="12" y2="12"></line>
@@ -142,7 +148,14 @@ export default function Navbar() {
         </div>
 
         {mobileOpen && (
-          <div className="md:hidden bg-white rounded-lg shadow-lg mt-2 p-4 space-y-3">
+          <div className="lg:hidden max-h-[calc(100vh-7rem)] overflow-y-auto rounded-xl bg-white p-4 shadow-xl ring-1 ring-slate-200">
+            <div className="mb-3 flex items-center justify-between border-b border-slate-100 pb-3">
+              <span className="text-sm font-bold text-sky-950">Menu</span>
+              <button onClick={() => setMobileOpen(false)} className="rounded-md px-2 py-1 text-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700" aria-label="Fermer le menu">
+                ×
+              </button>
+            </div>
+            <div className="space-y-1">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -151,13 +164,14 @@ export default function Navbar() {
                   handleNavClick(link.href)
                 }}
                 href={link.href}
-                className="block text-sm font-bold text-gray-700 hover:text-blue-500"
+                className="block rounded-lg px-3 py-3 text-sm font-bold text-gray-700 hover:bg-blue-50 hover:text-blue-500"
               >
                 {link.label}
               </a>
             ))}
+            </div>
             {user ? (
-              <div className="rounded-xl bg-slate-50 p-3">
+              <div className="mt-3 rounded-xl bg-slate-50 p-3">
                 <div className="flex items-center gap-3">
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">{initials}</span>
                   <div className="min-w-0">
@@ -170,7 +184,7 @@ export default function Navbar() {
                 </button>
               </div>
             ) : (
-              <Link to="/login" className="block text-sm font-bold text-blue-500">
+              <Link to="/login" className="mt-3 block rounded-lg bg-primary px-3 py-3 text-sm font-bold text-white" onClick={() => setMobileOpen(false)}>
                 Connexion
               </Link>
             )}

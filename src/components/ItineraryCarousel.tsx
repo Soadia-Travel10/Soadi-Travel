@@ -8,15 +8,15 @@ function RouteCard({ route }: { route: Trajet }) {
       <div className="flex flex-col pt-2 items-center text-sky-950 font-bold justify-center w-full py-2">
         {route.titre}
       </div>
-      <div className="w-full h-full p-5 overflow-x-auto">
-        <div className="flex flex-col w-[750px] md:w-full h-full">
-          <div className="flex relative flex-row w-full h-full space-x-2 md:space-x-0">
+      <div className="w-full h-full p-3 sm:p-5">
+        <div className="flex flex-col w-full h-full">
+          <div className="grid grid-cols-1 sm:grid-cols-3 relative w-full h-full gap-2">
             {[
               { img: route.image_1, label: route.titre_1, city: route.titre_1 },
               { img: route.image_2, label: route.titre_2, city: route.titre_2 },
               { img: route.image_3, label: route.titre_3, city: route.titre_3 },
             ].map((step, i) => (
-              <div key={i} className="relative outline outline-6 outline-offset-2 outline-white rounded-xl overflow-hidden grow h-40">
+              <div key={i} className="relative outline outline-4 sm:outline-6 outline-offset-2 outline-white rounded-xl overflow-hidden h-40 sm:h-48">
                 <img src={resolveImage(step.img)} alt={step.label} className="absolute inset-0 w-full h-full object-cover" />
                 <div className="flex flex-col justify-end absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-3">
                   <span className="text-white text-xs font-semibold">{step.label}</span>
