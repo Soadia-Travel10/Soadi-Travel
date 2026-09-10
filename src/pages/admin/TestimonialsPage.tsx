@@ -53,8 +53,8 @@ export default function TestimonialsPage() {
         onDelete={handleDelete}
       />
       {showForm && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl p-6 w-full max-w-md">
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 overflow-y-auto">
+          <div className="bg-white rounded-xl p-6 w-full max-w-md max-h-[calc(100vh-2rem)] overflow-y-auto">
             <h2 className="text-lg font-bold mb-4">{editing ? 'Modifier' : 'Nouveau témoignage'}</h2>
             <div className="space-y-3">
               <input placeholder="Nom" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full border rounded p-2 text-sm" />

@@ -136,7 +136,7 @@ export default function HubsPage() {
       />
 
       {showForm && (
-        <div className="fixed inset-0 bg-slate-950/70 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-slate-950/70 flex items-center justify-center p-4 z-50 overflow-y-auto">
           <form onSubmit={handleSave} className="bg-white rounded-2xl p-6 md:p-7 w-full max-w-lg shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-start justify-between gap-4 mb-5">
               <div>

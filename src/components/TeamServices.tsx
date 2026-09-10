@@ -26,9 +26,9 @@ export default function TeamServices() {
           trajet en un moment d'exception.
         </p>
       </div>
-      <div className="grid col-span-10 grid-cols-10 md:grid-cols-9 gap-4 mx-6 lg:mx-40 h-[550px] md:h-90 pb-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mx-4 sm:mx-6 lg:mx-40 min-h-[520px] sm:min-h-[420px] lg:min-h-[300px] pb-16">
         {items.map((item, i) => (
-          <div key={i} className={`relative ${item.span} h-50 overflow-hidden rounded-lg`}>
+          <div key={i} className="relative h-60 sm:h-64 lg:h-72 overflow-hidden rounded-lg">
             <div
               className="h-full w-full bg-cover bg-center hover:scale-110 transition-all duration-500"
               style={{ backgroundImage: `url(${item.img})` }}

@@ -113,7 +113,7 @@ export default function ReservationModal({ isOpen, onClose, selectedPlan }: Prop
 
   return (
     <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 overflow-y-auto">
-      <div className="bg-white rounded-lg shadow-lg max-w-[900px] w-full max-h-[90vh] overflow-y-auto p-6 relative">
+      <div className="bg-white rounded-lg shadow-lg max-w-[900px] w-full max-h-[92vh] overflow-y-auto p-4 sm:p-6 relative">
         <button
           onClick={() => { onClose(); resetForm(); }}
           className="absolute right-4 top-4 text-gray-500 hover:text-gray-800"
@@ -142,7 +142,7 @@ export default function ReservationModal({ isOpen, onClose, selectedPlan }: Prop
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm font-medium block mb-1">Ville</label>
                     <select
@@ -172,7 +172,7 @@ export default function ReservationModal({ isOpen, onClose, selectedPlan }: Prop
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm font-medium block mb-1">Date</label>
                     <input
@@ -220,7 +220,7 @@ export default function ReservationModal({ isOpen, onClose, selectedPlan }: Prop
                     className="w-full border rounded p-2 text-sm"
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm font-medium block mb-1">Email</label>
                     <input
@@ -297,7 +297,7 @@ export default function ReservationModal({ isOpen, onClose, selectedPlan }: Prop
                       )
                     })}
                   </div>
-                  <div className="flex items-center gap-4 mt-4 text-xs text-gray-500">
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-4 text-xs text-gray-500">
                     <span className="flex items-center gap-1"><span className="w-3 h-3 bg-white border border-gray-300 rounded inline-block"></span> Disponible</span>
                     <span className="flex items-center gap-1"><span className="w-3 h-3 bg-primary rounded inline-block"></span> Sélectionné</span>
                     <span className="flex items-center gap-1"><span className="w-3 h-3 bg-gray-300 rounded inline-block"></span> Occupé</span>

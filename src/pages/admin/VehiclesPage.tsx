@@ -147,8 +147,8 @@ export default function VehiclesPage() {
       />
 
       {showForm && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50">
-          <form onSubmit={handleSave} className="bg-white rounded-xl p-6 w-full max-w-md">
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 overflow-y-auto">
+          <form onSubmit={handleSave} className="bg-white rounded-xl p-6 w-full max-w-md max-h-[calc(100vh-2rem)] overflow-y-auto">
             <h2 className="text-lg font-bold mb-4">{editing ? 'Modifier le véhicule' : 'Nouveau véhicule'}</h2>
             {formError && <div className="bg-red-50 text-red-600 text-sm p-3 rounded mb-4">{formError}</div>}
             <div className="space-y-3">

@@ -101,7 +101,7 @@ export default function AdminLayout() {
             ← Voir le site public
           </Link>
         </header>
-        <main className="p-4 md:p-8">
+        <main className="min-w-0 p-4 sm:p-6 md:p-8 overflow-x-hidden">
           <Outlet />
         </main>
       </div>
