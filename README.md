@@ -24,3 +24,9 @@ npm run preview
 ```
 
 Les images sont intégrées comme assets Vite dans `src/assets/images/`.
+mencikeli@gmail.com
+VITE_SUPABASE_URL=https://your-project-ref.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=your-supabase-publishable-key
+VITE_EMAILJS_SERVICE_ID=service_9w8cejk
+VITE_EMAILJS_TEMPLATE_ID=template_8x5axm8
+VITE_EMAILJS_PUBLIC_KEY=zY1h4GnDvtdTns6ZM
