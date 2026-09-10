@@ -1,7 +1,6 @@
 import React from 'react'
 import baobabSunset from '../assets/images/baobab-sunset.webp'
-import busInterior from '../assets/images/bustouristique3.jpg'
-import busDetail from '../assets/images/Bus.svg'
+import aboutImage from '../assets/images/2.jpg'
 
 export default function About() {
   return (
@@ -37,8 +36,8 @@ export default function About() {
           </ul>
         </div>
         <div className="relative h-[400px] md:h-auto grid grid-cols-2 gap-2 p-6">
-          <img src={busInterior} alt="Comfortable bus interior" className="w-full h-full object-cover rounded-lg shadow-lg" />
-          <img src={busDetail} alt="Detail" className="w-full h-full object-contain bg-white rounded-lg shadow-lg p-4" />
+          <img src={aboutImage} alt="Soa Dia Travel" className="w-full h-full object-cover rounded-lg shadow-lg" />
+          <img src={aboutImage} alt="Soa Dia Travel" className="w-full h-full object-cover rounded-lg shadow-lg" />
         </div>
       </div>
     </section>
