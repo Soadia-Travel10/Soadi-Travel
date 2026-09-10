@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { api } from '../lib/api'
-import type { TouristicRoute, FeaturedCity, Vehicle } from '../types'
+import { supabase } from '../../utils/supabase'
+import type { NosImplementation, Partenaire, Trajet, Ville, VilleEmblematique, VehicleType } from '../types'
 import Hero from '../components/Hero'
 import About from '../components/About'
 import FeaturedCitiesScroll from '../components/FeaturedCitiesScroll'
@@ -13,21 +14,35 @@ import Contact from '../components/Contact'
 import Partners from '../components/Partners'
 
 export default function HomePage() {
-  const [routes, setRoutes] = useState<TouristicRoute[]>([])
-  const [cities, setCities] = useState<FeaturedCity[]>([])
-  const [vehicles, setVehicles] = useState<Vehicle[]>([])
+  const [routes, setRoutes] = useState<Trajet[]>([])
+  const [cities, setCities] = useState<Ville[]>([])
+  const [vehicles, setVehicles] = useState<VehicleType[]>([])
+  const [partners, setPartners] = useState<Partenaire[]>([])
+  const [implementations, setImplementations] = useState<NosImplementation[]>([])
+  const [emblematicCities, setEmblematicCities] = useState<VilleEmblematique[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     Promise.all([
-      api.get<TouristicRoute[]>('/touristic-routes'),
-      api.get<FeaturedCity[]>('/featured-cities'),
-      api.get<Vehicle[]>('/vehicles'),
+      supabase.from('trajets').select('*').order('created_at', { ascending: false }),
+      supabase.from('villes').select('*').order('created_at', { ascending: false }),
+      supabase.from('types_vehicules').select('*').order('created_at', { ascending: false }),
+      supabase.from('partenaires').select('*').order('created_at', { ascending: false }),
+      supabase.from('nos_implementations').select('*').order('created_at', { ascending: false }),
+      supabase.from('villes_emblematiques').select('*').order('ordre', { ascending: true }),
     ])
-      .then(([r, c, v]) => {
-        setRoutes(r)
-        setCities(c)
-        setVehicles(v)
+      .then(([r, c, v, p, i, e]) => {
+        setRoutes((r.data || []) as Trajet[])
+        if (c.error) throw c.error
+        setCities((c.data || []) as Ville[])
+        if (v.error) throw v.error
+        setVehicles((v.data || []) as VehicleType[])
+        if (p.error) throw p.error
+        setPartners((p.data || []) as Partenaire[])
+        if (i.error) throw i.error
+        setImplementations((i.data || []) as NosImplementation[])
+        if (e.error) throw e.error
+        setEmblematicCities((e.data || []) as VilleEmblematique[])
       })
       .catch((e) => console.error('Erreur de chargement des données:', e))
       .finally(() => setLoading(false))
@@ -54,14 +69,14 @@ export default function HomePage() {
     <main className="overflow-visible">
       <Hero />
       <About />
-      <FeaturedCitiesScroll cities={cities} />
+      <FeaturedCitiesScroll cities={emblematicCities} />
       <TeamServices />
       <CtaBanner />
-      <Implantations cities={cities} />
+      <Implantations cities={implementations} />
       <ItineraryCarousel routes={routes} />
       <VehicleTypes vehicles={vehicles} />
       <Contact />
-      <Partners />
+      <Partners partners={partners} />
     </main>
   )
 }

@@ -4,10 +4,11 @@ import { useAdminAuth } from '../../context/AdminAuthContext'
 
 const menuItems = [
   { path: '/admin', label: 'Tableau de bord', icon: 'dashboard' },
-  { path: '/admin/vehicles', label: 'Véhicules', icon: 'bus' },
-  { path: '/admin/hubs', label: 'Villes & destinations', icon: 'map' },
+  { path: '/admin/emblematic-cities', label: 'Villes emblématiques', icon: 'city' },
+  { path: '/admin/vehicles', label: 'Types de Véhicules', icon: 'bus' },
+  { path: '/admin/hubs', label: 'Nos destinations', icon: 'map' },
   { path: '/admin/routes', label: 'Itinéraires touristiques', icon: 'route' },
-  { path: '/admin/cities', label: 'Villes emblématiques', icon: 'city' },
+  { path: '/admin/cities', label: 'Partenaires', icon: 'city' },
 ]
 
 function Icon({ name }: { name: string }) {
@@ -36,8 +37,8 @@ export default function AdminLayout() {
   const navigate = useNavigate()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  const handleLogout = () => {
-    logout()
+  const handleLogout = async () => {
+    await logout()
     navigate('/admin/login')
   }
 

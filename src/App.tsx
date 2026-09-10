@@ -8,7 +8,6 @@ import { AdminAuthProvider } from './context/AdminAuthContext'
 import AdminLayout from './components/admin/AdminLayout'
 import ProtectedAdminRoute from './components/admin/ProtectedAdminRoute'
 import AdminLoginPage from './pages/admin/AdminLoginPage'
-import AdminSetupPage from './pages/admin/AdminSetupPage'
 import DashboardPage from './pages/admin/DashboardPage'
 import ReservationsPage from './pages/admin/ReservationsPage'
 import PlansPage from './pages/admin/PlansPage'
@@ -19,6 +18,7 @@ import CitiesPage from './pages/admin/CitiesPage'
 import TestimonialsPage from './pages/admin/TestimonialsPage'
 import StatsPage from './pages/admin/StatsPage'
 import SubscribersPage from './pages/admin/SubscribersPage'
+import EmblematicCitiesPage from './pages/admin/EmblematicCitiesPage'
 
 export default function App() {
   return (
@@ -33,7 +33,6 @@ export default function App() {
 
         {/* Admin auth */}
         <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route path="/admin/setup" element={<AdminSetupPage />} />
 
         {/* Admin panel protégé */}
         <Route
@@ -54,6 +53,7 @@ export default function App() {
           <Route path="testimonials" element={<TestimonialsPage />} />
           <Route path="stats" element={<StatsPage />} />
           <Route path="subscribers" element={<SubscribersPage />} />
+          <Route path="emblematic-cities" element={<EmblematicCitiesPage />} />
         </Route>
       </Routes>
     </AdminAuthProvider>

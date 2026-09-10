@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import type { User } from '../types'
+import { supabase } from '../../utils/supabase'
 
 interface AuthContextType {
   user: User | null
@@ -16,35 +17,61 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const stored = localStorage.getItem('user_data')
-    if (stored) {
-      try {
-        setUser(JSON.parse(stored))
-      } catch {}
+    let mounted = true
+
+    supabase.auth.getUser().then(({ data: { user: supabaseUser } }) => {
+      if (mounted) {
+        setUser(
+          supabaseUser
+            ? {
+                id: supabaseUser.id,
+                name: supabaseUser.user_metadata.name || supabaseUser.email?.split('@')[0] || 'Utilisateur',
+                email: supabaseUser.email || '',
+              }
+            : null,
+        )
+        setLoading(false)
+      }
+    })
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      const supabaseUser = session?.user
+      if (mounted) {
+        setUser(
+          supabaseUser
+            ? {
+                id: supabaseUser.id,
+                name: supabaseUser.user_metadata.name || supabaseUser.email?.split('@')[0] || 'Utilisateur',
+                email: supabaseUser.email || '',
+              }
+            : null,
+        )
+      }
+    })
+
+    return () => {
+      mounted = false
+      listener.subscription.unsubscribe()
     }
-    setLoading(false)
   }, [])
 
   const login = async (email: string, password: string) => {
-    if (!email || password.length < 4) throw new Error('Email ou mot de passe invalide')
-    const currentUser = { id: 1, name: email.split('@')[0], email }
-    localStorage.setItem('user_token', 'local-user')
-    localStorage.setItem('user_data', JSON.stringify(currentUser))
-    setUser(currentUser)
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    if (error) throw error
   }
 
   const register = async (name: string, email: string, password: string) => {
-    if (!name || !email || password.length < 4) throw new Error('Veuillez remplir tous les champs')
-    const currentUser = { id: Date.now(), name, email }
-    localStorage.setItem('user_token', 'local-user')
-    localStorage.setItem('user_data', JSON.stringify(currentUser))
-    setUser(currentUser)
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { name } },
+    })
+    if (error) throw error
   }
 
-  const logout = () => {
-    localStorage.removeItem('user_token')
-    localStorage.removeItem('user_data')
-    setUser(null)
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) throw error
   }
 
   return (
