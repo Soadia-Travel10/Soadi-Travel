@@ -30,9 +30,15 @@ export default function Contact() {
         emailJsTemplateId,
         {
           from_name: formData.get('name'),
+          email: formData.get('email'),
           reply_to: formData.get('email'),
           subject: formData.get('subject') || 'Nouveau message depuis le site',
           message: formData.get('message'),
+          time: new Intl.DateTimeFormat('fr-FR', {
+            dateStyle: 'medium',
+            timeStyle: 'short',
+          }).format(new Date()),
+          site_name: 'Soa Dia Travel Madagascar',
         },
         { publicKey: emailJsPublicKey },
       )

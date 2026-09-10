@@ -1,123 +1,148 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { api } from '../../lib/api'
+import { supabase } from '../../../utils/supabase'
+import {
+  Bar,
+  BarChart,
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
 
-interface DashboardData {
-  counts: {
-    reservations: number
-    plans: number
-    vehicles: number
-    testimonials: number
-    subscribers: number
-    hubs: number
-  }
-  recentReservations: any[]
-  revenueByStatus: { status: string; count: number; total: number }[]
+interface DashboardCount {
+  label: string
+  value: number
+  link: string
+  color: string
+  description: string
 }
 
-const statusLabels: Record<string, string> = {
-  pending: 'En attente',
-  confirmed: 'Confirmée',
-  cancelled: 'Annulée',
-}
+const resources = [
+  { label: 'Villes emblématiques', table: 'villes_emblematiques', link: '/admin/emblematic-cities', color: 'bg-blue-500', description: 'Galerie publique' },
+  { label: 'Types de véhicules', table: 'types_vehicules', link: '/admin/vehicles', color: 'bg-violet-500', description: 'Flotte disponible' },
+  { label: 'Nos destinations', table: 'nos_implementations', link: '/admin/hubs', color: 'bg-teal-500', description: 'Implantations' },
+  { label: 'Trajets touristiques', table: 'trajets', link: '/admin/routes', color: 'bg-amber-500', description: 'Cartes de trajets' },
+  { label: 'Partenaires', table: 'partenaires', link: '/admin/cities', color: 'bg-rose-500', description: 'Logos partenaires' },
+  { label: 'Villes', table: 'villes', link: '/admin/hubs', color: 'bg-emerald-500', description: 'Catalogue destinations' },
+] as const
 
-const statusColors: Record<string, string> = {
-  pending: 'bg-yellow-100 text-yellow-700',
-  confirmed: 'bg-green-100 text-green-700',
-  cancelled: 'bg-red-100 text-red-700',
-}
+const chartColors = ['#2563eb', '#7c3aed', '#0d9488', '#f59e0b', '#e11d48', '#10b981']
 
 export default function DashboardPage() {
-  const [data, setData] = useState<DashboardData | null>(null)
+  const [counts, setCounts] = useState<DashboardCount[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
   useEffect(() => {
-    api.get<DashboardData>('/admin/dashboard', 'admin')
-      .then(setData)
-      .catch((e) => console.error(e))
+    const loadCounts = async () => {
+      const results = await Promise.all(
+        resources.map(async (resource) => {
+          const { count, error: queryError } = await supabase
+            .from(resource.table)
+            .select('*', { count: 'exact', head: true })
+
+          if (queryError) throw queryError
+          return { ...resource, value: count || 0 }
+        }),
+      )
+
+      setCounts(results)
+    }
+
+    loadCounts()
+      .catch((loadError) => setError(loadError instanceof Error ? loadError.message : 'Impossible de charger les statistiques.'))
       .finally(() => setLoading(false))
   }, [])
 
-  if (loading) {
-    return <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary"></div>
-  }
+  if (loading) return <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary" />
 
-  const cards = [
-    { label: 'Réservations', value: data?.counts.reservations || 0, link: '/admin/reservations', color: 'bg-blue-500' },
-    { label: 'Plans tarifaires', value: data?.counts.plans || 0, link: '/admin/plans', color: 'bg-green-500' },
-    { label: 'Véhicules', value: data?.counts.vehicles || 0, link: '/admin/vehicles', color: 'bg-purple-500' },
-    { label: 'Témoignages', value: data?.counts.testimonials || 0, link: '/admin/testimonials', color: 'bg-pink-500' },
-    { label: 'Abonnés newsletter', value: data?.counts.subscribers || 0, link: '/admin/subscribers', color: 'bg-orange-500' },
-    { label: 'Villes de départ', value: data?.counts.hubs || 0, link: '/admin/hubs', color: 'bg-teal-500' },
-  ]
+  const chartData = counts.map((item) => ({
+    name: item.label.replace('Villes emblématiques', 'Villes embl.').replace('Types de véhicules', 'Véhicules').replace('Nos destinations', 'Destinations').replace('Trajets touristiques', 'Trajets'),
+    value: item.value,
+  }))
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold text-sky-950 mb-1">Tableau de bord</h1>
-        <p className="text-sm text-gray-500">Vue d'ensemble de l'activité Soa Dia Travel</p>
+      <div className="rounded-2xl bg-gradient-to-r from-sky-950 to-blue-700 p-6 md:p-8 text-white shadow-lg">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-200 mb-2">Administration</p>
+        <h1 className="text-2xl md:text-3xl font-bold mb-2">Tableau de bord</h1>
+        <p className="text-sm text-blue-100">Vue réelle des données enregistrées dans Supabase.</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {cards.map((card) => (
+      {error && <div className="bg-red-50 text-red-600 text-sm p-3 rounded-lg">{error}</div>}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+        {counts.map((card) => (
           <Link
-            key={card.label}
+            key={card.table}
             to={card.link}
-            className="bg-white rounded-xl shadow p-6 hover:shadow-lg transition flex items-center justify-between"
+            className="group bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
           >
-            <div>
-              <div className="text-sm text-gray-500 mb-1">{card.label}</div>
-              <div className="text-3xl font-bold text-sky-950">{card.value}</div>
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-sm text-gray-500 mb-2">{card.label}</p>
+                <p className="text-4xl font-bold text-sky-950">{card.value}</p>
+                <p className="text-xs text-gray-400 mt-2">{card.description}</p>
+              </div>
+              <span className={`h-12 w-12 rounded-2xl ${card.color} opacity-80 group-hover:scale-110 transition-transform`} />
             </div>
-            <div className={`w-12 h-12 rounded-full ${card.color} opacity-20`}></div>
+            <div className="mt-5 text-sm font-semibold text-primary">Gérer →</div>
           </Link>
         ))}
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="bg-white rounded-xl shadow p-6">
-          <h2 className="font-bold text-sky-950 mb-4">Réservations par statut</h2>
-          <div className="space-y-3">
-            {data?.revenueByStatus.map((r) => (
-              <div key={r.status} className="flex items-center justify-between">
-                <span className={`text-xs font-semibold px-2 py-1 rounded ${statusColors[r.status] || 'bg-gray-100'}`}>
-                  {statusLabels[r.status] || r.status}
-                </span>
-                <div className="text-sm">
-                  <span className="font-semibold">{r.count}</span> réservation(s) —{' '}
-                  <span className="text-gray-500">{(r.total || 0).toLocaleString('fr-FR')} MGA</span>
-                </div>
-              </div>
-            ))}
-            {(!data?.revenueByStatus || data.revenueByStatus.length === 0) && (
-              <p className="text-sm text-gray-400">Aucune donnée disponible</p>
-            )}
-          </div>
-        </div>
+      {!error && counts.length > 0 && (
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="mb-4">
+              <h2 className="text-lg font-bold text-sky-950">Répartition des contenus</h2>
+              <p className="text-sm text-gray-500">Part de chaque table dans le catalogue.</p>
+            </div>
+            <div className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="48%" innerRadius={62} outerRadius={105} paddingAngle={3}>
+                    {chartData.map((entry, index) => <Cell key={entry.name} fill={chartColors[index % chartColors.length]} />)}
+                  </Pie>
+                  <Tooltip formatter={(value: number) => [value, 'Éléments']} />
+                  <Legend verticalAlign="bottom" height={36} />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </section>
 
-        <div className="bg-white rounded-xl shadow p-6">
-          <h2 className="font-bold text-sky-950 mb-4">Dernières réservations</h2>
-          <div className="space-y-3">
-            {data?.recentReservations.map((r) => (
-              <div key={r.id} className="flex items-center justify-between text-sm border-b pb-2 last:border-0">
-                <div>
-                  <div className="font-medium">{r.customer_name || 'Client'}</div>
-                  <div className="text-xs text-gray-400">{r.reservation_date} {r.reservation_time}</div>
-                </div>
-                <span className={`text-xs font-semibold px-2 py-1 rounded ${statusColors[r.status] || 'bg-gray-100'}`}>
-                  {statusLabels[r.status] || r.status}
-                </span>
-              </div>
-            ))}
-            {(!data?.recentReservations || data.recentReservations.length === 0) && (
-              <p className="text-sm text-gray-400">Aucune réservation récente</p>
-            )}
-          </div>
-          <Link to="/admin/reservations" className="text-sm text-primary font-semibold hover:underline block mt-4">
-            Voir toutes les réservations →
-          </Link>
+          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="mb-4">
+              <h2 className="text-lg font-bold text-sky-950">Volume par ressource</h2>
+              <p className="text-sm text-gray-500">Nombre d’enregistrements présents dans Supabase.</p>
+            </div>
+            <div className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData} margin={{ top: 8, right: 12, left: -12, bottom: 8 }}>
+                  <XAxis dataKey="name" angle={-18} textAnchor="end" height={58} tick={{ fontSize: 11, fill: '#64748b' }} />
+                  <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: '#64748b' }} />
+                  <Tooltip formatter={(value: number) => [value, 'Éléments']} />
+                  <Bar dataKey="value" name="Éléments" radius={[6, 6, 0, 0]}>
+                    {chartData.map((entry, index) => <Cell key={entry.name} fill={chartColors[index % chartColors.length]} />)}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </section>
         </div>
-      </div>
+      )}
+
+      {!error && counts.length > 0 && (
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 className="text-lg font-bold text-sky-950 mb-2">Données synchronisées</h2>
+          <p className="text-sm text-gray-500">Les compteurs ci-dessus sont lus directement depuis les tables Supabase. Les anciennes données locales ont été retirées de ce tableau de bord.</p>
+        </div>
+      )}
     </div>
   )
 }
