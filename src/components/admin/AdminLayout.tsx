@@ -5,6 +5,7 @@ import { useAdminAuth } from '../../context/AdminAuthContext'
 const menuItems = [
   { path: '/admin', label: 'Tableau de bord', icon: 'dashboard' },
   { path: '/admin/emblematic-cities', label: 'Villes emblématiques', icon: 'city' },
+  { path: '/admin/team-services', label: 'Équipe et services', icon: 'star' },
   { path: '/admin/vehicles', label: 'Types de Véhicules', icon: 'bus' },
   { path: '/admin/hubs', label: 'Nos destinations', icon: 'map' },
   { path: '/admin/routes', label: 'Itinéraires touristiques', icon: 'route' },

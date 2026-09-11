@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { VehicleType } from '../types'
 import { resolveImage, staticImages } from '../lib/images'
 
@@ -7,6 +7,9 @@ interface Props {
 }
 
 export default function VehicleTypes({ vehicles }: Props) {
+  const [showAll, setShowAll] = useState(false)
+  const visibleVehicles = showAll ? vehicles : vehicles.slice(0, 3)
+
   return (
     <section id="vehicles" className="py-20 bg-slate-50">
       <div className="container mx-auto px-4">
@@ -18,44 +21,62 @@ export default function VehicleTypes({ vehicles }: Props) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {vehicles.map((vehicle, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+          {visibleVehicles.map((vehicle, index) => (
             <article
               key={vehicle.id}
-              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 animate-fade-in-up"
+              className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md hover:-translate-y-1 hover:shadow-xl transition-all duration-500 animate-fade-in-up"
               style={{ animationDelay: `${index * 120}ms` }}
             >
-              <div className="relative h-60 md:h-64 bg-gradient-to-br from-slate-100 via-white to-blue-50 flex items-center justify-center p-6 overflow-hidden">
-                <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-blue-100/50 transition-transform duration-700 group-hover:scale-150" />
+              <div className="relative h-44 md:h-48 bg-gradient-to-br from-slate-100 via-white to-blue-50 flex items-center justify-center p-4 overflow-hidden">
+                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-blue-100/50 transition-transform duration-700 group-hover:scale-150" />
                 <img
                   src={vehicle.image ? resolveImage(vehicle.image) : staticImages.busTouristique}
                   alt={vehicle.nom}
                   className="relative z-10 w-full h-full object-contain drop-shadow-xl transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-              <div className="p-6">
-                <div className="flex items-start justify-between gap-4 mb-4">
+              <div className="p-4">
+                <div className="flex items-start justify-between gap-3 mb-3">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">Soa Dia Travel</p>
-                    <h3 className="text-xl font-bold text-sky-950">{vehicle.nom}</h3>
+                    <h3 className="text-lg font-bold text-sky-950">{vehicle.nom}</h3>
                   </div>
-                  <span className="shrink-0 rounded-full bg-primary/10 text-primary px-3 py-1.5 text-xs font-bold">
+                  <span className="shrink-0 rounded-full bg-primary/10 text-primary px-2 py-1 text-[11px] font-bold">
                     {vehicle.type || 'Véhicule'}
                   </span>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed mb-5">
+                <p className="text-xs text-gray-600 leading-relaxed mb-4">
                   {vehicle.type
                     ? `Véhicule de type ${vehicle.type} pour vos trajets et vos découvertes.`
                     : 'Un véhicule confortable pour vos trajets et vos découvertes.'}
                 </p>
-                <div className="flex items-center gap-2 text-sm font-semibold text-sky-950">
-                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-100" />
+                <div className="flex items-center gap-2 text-xs font-semibold text-sky-950">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500 ring-2 ring-emerald-100" />
                   Disponible pour vos réservations
                 </div>
               </div>
             </article>
           ))}
         </div>
+        {vehicles.length > 0 && (
+          <p className="mt-6 text-center text-xs text-slate-500">
+            {showAll ? `${vehicles.length} véhicules affichés` : `${Math.min(vehicles.length, 3)} véhicules affichés`}
+          </p>
+        )}
+        {vehicles.length > 0 && (
+          <button
+            type="button"
+            onClick={() => setShowAll((current) => !current)}
+            aria-expanded={showAll}
+            className="mx-auto mt-3 block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90"
+          >
+            {showAll ? 'Réduire' : `Voir tous les véhicules (${vehicles.length})`}
+          </button>
+        )}
+        {vehicles.length === 0 && (
+          <p className="mt-8 text-center text-sm text-slate-500">Aucun véhicule disponible pour le moment.</p>
+        )}
       </div>
     </section>
   )

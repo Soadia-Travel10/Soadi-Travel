@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { Partenaire } from '../types'
 
 export default function Partners({ partners }: { partners: Partenaire[] }) {
-  if (partners.length === 0) return null
+  const [showAll, setShowAll] = useState(false)
 
-  const doubled = [...partners, ...partners]
+  const visiblePartners = showAll ? partners : partners.slice(0, 4)
+
+  if (partners.length === 0) return null
 
   return (
     <section id="partners" className="py-20 bg-slate-50 overflow-hidden">
@@ -20,9 +22,9 @@ export default function Partners({ partners }: { partners: Partenaire[] }) {
         <div className="absolute inset-y-0 left-0 w-16 md:w-32 z-10 bg-gradient-to-r from-slate-50 to-transparent pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-16 md:w-32 z-10 bg-gradient-to-l from-slate-50 to-transparent pointer-events-none" />
         <div className="flex animate-partners-scroll gap-5 w-max py-4 px-2">
-          {doubled.map((partner, index) => (
+          {visiblePartners.map((partner) => (
             <div
-              key={`${partner.id}-${index}`}
+              key={partner.id}
               className="group w-56 md:w-64 h-44 flex-shrink-0 bg-white border border-slate-200 rounded-2xl p-6 flex flex-col items-center justify-center gap-4 shadow-md hover:-translate-y-2 hover:shadow-xl transition-all duration-500"
             >
               <div className="h-20 w-36 flex items-center justify-center">
@@ -38,6 +40,7 @@ export default function Partners({ partners }: { partners: Partenaire[] }) {
             </div>
           ))}
         </div>
+        {partners.length > 4 && <button onClick={() => setShowAll(!showAll)} className="mx-auto mt-8 block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">{showAll ? 'Réduire' : 'Voir tous'}</button>}
       </div>
 
       <style>{`
