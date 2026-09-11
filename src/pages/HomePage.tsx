@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { api } from '../lib/api'
 import { supabase } from '../../utils/supabase'
-import type { NosImplementation, Partenaire, Trajet, Ville, VilleEmblematique, VehicleType } from '../types'
+import type { EquipeService, NosImplementation, Partenaire, Trajet, Ville, VilleEmblematique, VehicleType } from '../types'
 import Hero from '../components/Hero'
 import About from '../components/About'
 import FeaturedCitiesScroll from '../components/FeaturedCitiesScroll'
@@ -20,6 +20,8 @@ export default function HomePage() {
   const [partners, setPartners] = useState<Partenaire[]>([])
   const [implementations, setImplementations] = useState<NosImplementation[]>([])
   const [emblematicCities, setEmblematicCities] = useState<VilleEmblematique[]>([])
+  const [teams, setTeams] = useState<EquipeService[]>([])
+  const [services, setServices] = useState<EquipeService[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -30,8 +32,10 @@ export default function HomePage() {
       supabase.from('partenaires').select('*').order('created_at', { ascending: false }),
       supabase.from('nos_implementations').select('*').order('created_at', { ascending: false }),
       supabase.from('villes_emblematiques').select('*').order('ordre', { ascending: true }),
+      supabase.from('nos_equipes').select('*').order('ordre', { ascending: true }),
+      supabase.from('nos_services').select('*').order('ordre', { ascending: true }),
     ])
-      .then(([r, c, v, p, i, e]) => {
+      .then(([r, c, v, p, i, e, t, s]) => {
         setRoutes((r.data || []) as Trajet[])
         if (c.error) throw c.error
         setCities((c.data || []) as Ville[])
@@ -43,6 +47,10 @@ export default function HomePage() {
         setImplementations((i.data || []) as NosImplementation[])
         if (e.error) throw e.error
         setEmblematicCities((e.data || []) as VilleEmblematique[])
+        if (t.error) throw t.error
+        setTeams((t.data || []) as EquipeService[])
+        if (s.error) throw s.error
+        setServices((s.data || []) as EquipeService[])
       })
       .catch((e) => console.error('Erreur de chargement des données:', e))
       .finally(() => setLoading(false))
@@ -70,7 +78,7 @@ export default function HomePage() {
       <Hero />
       <About />
       <FeaturedCitiesScroll cities={emblematicCities} />
-      <TeamServices />
+      <TeamServices teams={teams} services={services} />
       <CtaBanner />
       <Implantations cities={implementations} />
       <ItineraryCarousel routes={routes} />

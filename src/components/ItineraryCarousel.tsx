@@ -45,6 +45,8 @@ function RouteCard({ route }: { route: Trajet }) {
 
 export default function ItineraryCarousel({ routes }: { routes: Trajet[] }) {
   const [index, setIndex] = useState(0)
+  const [showAll, setShowAll] = useState(false)
+  const visibleRoutes = showAll ? routes : routes.slice(0, 4)
   const perPage = 1
 
   return (
@@ -64,10 +66,11 @@ export default function ItineraryCarousel({ routes }: { routes: Trajet[] }) {
 
       <div className="max-w-5xl mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-6">
-          {routes.map((route) => (
+          {visibleRoutes.map((route) => (
             <RouteCard key={route.id} route={route} />
           ))}
         </div>
+        {routes.length > 4 && <button onClick={() => setShowAll(!showAll)} className="mx-auto mt-8 block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">{showAll ? 'Réduire' : 'Voir tous'}</button>}
       </div>
     </section>
   )

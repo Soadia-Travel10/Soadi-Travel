@@ -28,6 +28,14 @@ export interface VilleEmblematique {
   created_at: string
 }
 
+export interface EquipeService {
+  id: string
+  nom: string
+  image: string | null
+  ordre: number
+  created_at: string
+}
+
 export interface NosImplementation {
   id: string
   nom: string

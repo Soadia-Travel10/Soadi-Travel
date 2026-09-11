@@ -1,9 +1,11 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import type { NosImplementation } from '../types'
 import { resolveImage } from '../lib/images'
 
 export default function Implantations({ cities }: { cities: NosImplementation[] }) {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const [showAll, setShowAll] = useState(false)
+  const visibleCities = showAll ? cities : cities.slice(0, 4)
 
   return (
     <section id="location" className="mt-16 py-8">
@@ -23,7 +25,7 @@ export default function Implantations({ cities }: { cities: NosImplementation[] 
           ref={scrollRef}
           className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory"
         >
-          {cities.map((city) => (
+          {visibleCities.map((city) => (
             <div key={city.id} className="flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/3 px-4 snap-start">
               <div className="bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300">
                 <div className="relative h-48 md:h-64">
@@ -40,6 +42,7 @@ export default function Implantations({ cities }: { cities: NosImplementation[] 
             </div>
           ))}
         </div>
+        {cities.length > 4 && <button onClick={() => setShowAll(!showAll)} className="mx-auto mt-6 block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">{showAll ? 'Réduire' : 'Voir tous'}</button>}
       </div>
     </section>
   )

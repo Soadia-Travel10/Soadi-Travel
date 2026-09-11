@@ -1,45 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { staticImages } from '../lib/images'
+import type { EquipeService } from '../types'
 
-export default function TeamServices() {
+export default function TeamServices({ teams, services }: { teams: EquipeService[]; services: EquipeService[] }) {
   const items = [
-    { img: staticImages.pachypodium, label: 'STAREX VIP', span: 'col-span-10 md:col-span-5' },
-    { img: staticImages.busTouristique, label: 'BUS TOURISTIQUE', span: 'col-span-5 md:col-span-4' },
-    { img: staticImages.busTouristiqueAlt, label: 'BUS TOURISTIQUE', span: 'col-span-5 md:col-span-4' },
-    { img: staticImages.tanaStaff, label: 'Réception', span: 'col-span-10 md:col-span-5' },
+    ...teams.map((item) => ({ ...item, category: 'Équipe' })),
+    ...services.map((item) => ({ ...item, category: 'Service' })),
   ]
+  const [showAll, setShowAll] = useState(false)
+  const visibleItems = showAll ? items : items.slice(0, 4)
 
   return (
-    <section className="pt-16 bg-white text-gray-800">
-      <div className="text-center mx-4 sm:mx-6 lg:mx-auto lg:max-w-4xl mb-6 px-0 sm:px-4">
-        <h2 className="text-2xl md:text-3xl font-bold text-sky-950 mb-4">
+    <section className="relative overflow-hidden bg-slate-50 py-20 text-gray-800">
+      <div className="pointer-events-none absolute -left-24 top-20 h-56 w-56 rounded-full bg-blue-100/60 blur-3xl" />
+      <div className="pointer-events-none absolute -right-24 bottom-10 h-64 w-64 rounded-full bg-sky-100/70 blur-3xl" />
+      <div className="relative mx-4 mb-12 text-center sm:mx-6 lg:mx-auto lg:max-w-3xl">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-primary">L'expérience Soa Dia</p>
+        <h2 className="mb-5 text-3xl font-bold text-sky-950 md:text-4xl">
           Notre équipe et nos services
         </h2>
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="mb-4 text-sm leading-relaxed text-gray-600">
           Capturer l'instant et voyager avec Soa Dia, c'est bien plus qu'un simple déplacement. Nous
           vous invitons à vivre chaque trajet comme une expérience unique, où confort, sécurité et
           découverte se conjuguent pour rendre vos voyages inoubliables.
         </p>
-        <p className="text-gray-500">
+        <p className="text-sm leading-relaxed text-gray-500">
           Notre équipe passionnée met tout en œuvre pour vous offrir un service personnalisé, adapté
           à vos besoins et à vos envies. Faites confiance à notre expertise pour transformer chaque
           trajet en un moment d'exception.
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mx-4 sm:mx-6 lg:mx-40 min-h-[520px] sm:min-h-[420px] lg:min-h-[300px] pb-16">
-        {items.map((item, i) => (
-          <div key={i} className="relative h-60 sm:h-64 lg:h-72 overflow-hidden rounded-lg">
+      <div className="relative mx-4 grid grid-cols-1 gap-6 pb-4 sm:mx-6 sm:grid-cols-2 lg:mx-auto lg:max-w-6xl lg:grid-cols-4">
+        {visibleItems.map((item) => (
+          <article key={item.id} className="group relative h-72 overflow-hidden rounded-2xl bg-slate-200 shadow-lg ring-1 ring-slate-200 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
             <div
-              className="h-full w-full bg-cover bg-center hover:scale-110 transition-all duration-500"
-              style={{ backgroundImage: `url(${item.img})` }}
+              className="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style={{ backgroundImage: `url(${item.image || staticImages.busTouristique})` }}
             >
-              <div className="flex justify-center items-center absolute inset-0 bg-none hover:bg-gray-800/25 text-transparent text-xl md:text-4xl font-bold hover:text-white transition-all duration-500">
-                {item.label}
+              <div className="absolute inset-0 bg-gradient-to-t from-sky-950/90 via-sky-950/15 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+                <span className="mb-2 inline-flex rounded-full border border-white/30 bg-white/15 px-3 py-1 text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm">
+                  {item.category}
+                </span>
+                <h3 className="text-xl font-bold md:text-2xl">{item.nom}</h3>
               </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
+      {items.length > 4 && <button onClick={() => setShowAll(!showAll)} className="relative mx-auto mt-8 block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">{showAll ? 'Réduire' : 'Voir tous'}</button>}
+      {items.length === 0 && <p className="relative text-center text-sm text-gray-500">Aucune équipe ou service disponible pour le moment.</p>}
     </section>
   )
 }

@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { VilleEmblematique } from '../types'
 import { resolveImage } from '../lib/images'
 
 export default function FeaturedCitiesScroll({ cities }: { cities: VilleEmblematique[] }) {
+  const [showAll, setShowAll] = useState(false)
+  const visibleCities = showAll ? cities : cities.slice(0, 4)
   if (cities.length === 0) return null
 
   return (
@@ -22,7 +24,7 @@ export default function FeaturedCitiesScroll({ cities }: { cities: VilleEmblemat
 
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
-          {cities.map((city) => (
+          {visibleCities.map((city) => (
             <div
               key={city.id}
               className="relative h-64 rounded-xl overflow-hidden bg-cover bg-center group cursor-pointer shadow-md hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
@@ -34,6 +36,7 @@ export default function FeaturedCitiesScroll({ cities }: { cities: VilleEmblemat
             </div>
           ))}
         </div>
+        {cities.length > 4 && <button onClick={() => setShowAll(!showAll)} className="mx-auto mt-8 block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">{showAll ? 'Réduire' : 'Voir tous'}</button>}
       </div>
     </section>
   )

@@ -19,6 +19,7 @@ import TestimonialsPage from './pages/admin/TestimonialsPage'
 import StatsPage from './pages/admin/StatsPage'
 import SubscribersPage from './pages/admin/SubscribersPage'
 import EmblematicCitiesPage from './pages/admin/EmblematicCitiesPage'
+import TeamServicesPage from './pages/admin/TeamServicesPage'
 
 export default function App() {
   return (
@@ -54,6 +55,7 @@ export default function App() {
           <Route path="stats" element={<StatsPage />} />
           <Route path="subscribers" element={<SubscribersPage />} />
           <Route path="emblematic-cities" element={<EmblematicCitiesPage />} />
+          <Route path="team-services" element={<TeamServicesPage />} />
         </Route>
       </Routes>
     </AdminAuthProvider>
