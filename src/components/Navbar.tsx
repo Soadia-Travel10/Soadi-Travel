@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useAdminAuth } from '../context/AdminAuthContext'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
   const { user, logout } = useAuth()
+  const { admin } = useAdminAuth()
   const location = useLocation()
   const navigate = useNavigate()
   const isHome = location.pathname === '/'
@@ -115,6 +117,15 @@ export default function Navbar() {
                         <p className="truncate text-xs text-slate-500">{user.email}</p>
                       </div>
                     </div>
+                    {admin && (
+                      <Link
+                        to="/admin"
+                        onClick={() => setProfileOpen(false)}
+                        className="mt-3 block rounded-lg bg-primary/10 px-2 py-2 text-sm font-semibold text-primary hover:bg-primary/20"
+                      >
+                        Accéder à l'administration
+                      </Link>
+                    )}
                     <button onClick={handleLogout} className="mt-2 w-full rounded-lg px-2 py-2 text-left text-sm font-semibold text-red-600 hover:bg-red-50">
                       Déconnexion
                     </button>
@@ -123,7 +134,7 @@ export default function Navbar() {
               </div>
             ) : (
               <Link
-                to="/login"
+                to="/admin/login"
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors h-10 px-4 py-2 bg-primary text-white hover:bg-primary/90"
               >
                 Connexion
@@ -179,6 +190,15 @@ export default function Navbar() {
                     <p className="truncate text-xs text-slate-500">{user.email}</p>
                   </div>
                 </div>
+                {admin && (
+                  <Link
+                    to="/admin"
+                    onClick={() => setMobileOpen(false)}
+                    className="mt-3 block rounded-lg bg-primary/10 px-3 py-2 text-sm font-bold text-primary hover:bg-primary/20"
+                  >
+                    Accéder à l'administration
+                  </Link>
+                )}
                 <button onClick={handleLogout} className="mt-3 w-full rounded-lg bg-red-50 px-3 py-2 text-left text-sm font-bold text-red-600 hover:bg-red-100">
                   Déconnexion
                 </button>

@@ -68,7 +68,7 @@ export default function PlansPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
         <h1 className="text-2xl font-bold text-sky-950">Grille tarifaire</h1>
         <button onClick={openNew} className="bg-primary text-white px-4 py-2 rounded font-semibold text-sm hover:bg-primary/90">
           + Nouveau plan

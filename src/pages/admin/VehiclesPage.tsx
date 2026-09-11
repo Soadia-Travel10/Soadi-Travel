@@ -117,7 +117,7 @@ export default function VehiclesPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center gap-4">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-sky-950">Types de véhicules</h1>
           <p className="text-sm text-gray-500 mt-1">Données synchronisées avec Supabase</p>
