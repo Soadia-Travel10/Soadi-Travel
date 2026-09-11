@@ -275,7 +275,7 @@ export default function ReservationModal({ isOpen, onClose, selectedPlan }: Prop
                   Sélectionnez vos sièges ({currentVehicle?.name})
                 </label>
                 <div className="bg-gray-50 rounded-lg p-4 border">
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
                     {currentVehicle?.seats.map((seat) => {
                       const isSelected = selectedSeats.includes(seat.id.toString())
                       const isAvailable = seat.status === 'available'
@@ -284,7 +284,7 @@ export default function ReservationModal({ isOpen, onClose, selectedPlan }: Prop
                           key={seat.id}
                           onClick={() => toggleSeat(seat.id.toString(), seat.status)}
                           disabled={!isAvailable}
-                          className={`p-2 rounded text-xs font-semibold border transition ${
+                          className={`p-2 sm:p-2.5 rounded text-xs font-semibold border transition ${
                             isSelected
                               ? 'bg-primary text-white border-primary'
                               : isAvailable

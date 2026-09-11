@@ -11,7 +11,7 @@ export default function TeamServices() {
 
   return (
     <section className="pt-16 bg-white text-gray-800">
-      <div className="text-center mx-6 lg:mx-80 mb-6">
+      <div className="text-center mx-4 sm:mx-6 lg:mx-auto lg:max-w-4xl mb-6 px-0 sm:px-4">
         <h2 className="text-2xl md:text-3xl font-bold text-sky-950 mb-4">
           Notre équipe et nos services
         </h2>
