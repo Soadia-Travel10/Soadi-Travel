@@ -1,54 +1,18 @@
-import React, { useState } from 'react'
-import emailjs from '@emailjs/browser'
+import React from 'react'
 
-const emailJsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
-const emailJsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
-const emailJsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+const CONTACT_EMAIL = 'dircom@soatransplus.mg'
 
 export default function Contact() {
-  const [sent, setSent] = useState(false)
-  const [sending, setSending] = useState(false)
-  const [error, setError] = useState('')
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  // Pas de serveur : le formulaire ouvre le client mail du visiteur avec le message pré-rempli.
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setSent(false)
-    setError('')
+    const data = new FormData(event.currentTarget)
+    const subject = String(data.get('subject') || 'Message depuis le site Soadia Travel')
+    const body = `${data.get('message')}
 
-    if (!emailJsServiceId || !emailJsTemplateId || !emailJsPublicKey) {
-      setError("Le formulaire d'email n'est pas encore configuré.")
-      return
-    }
-
-    setSending(true)
-    const form = event.currentTarget
-    const formData = new FormData(form)
-
-    try {
-      await emailjs.send(
-        emailJsServiceId,
-        emailJsTemplateId,
-        {
-          from_name: formData.get('name'),
-          email: formData.get('email'),
-          reply_to: formData.get('email'),
-          subject: formData.get('subject') || 'Nouveau message depuis le site',
-          message: formData.get('message'),
-          time: new Intl.DateTimeFormat('fr-FR', {
-            dateStyle: 'medium',
-            timeStyle: 'short',
-          }).format(new Date()),
-          site_name: 'Soa Dia Travel Madagascar',
-        },
-        { publicKey: emailJsPublicKey },
-      )
-      setSent(true)
-      form.reset()
-    } catch {
-      setError("Impossible d'envoyer le message. Veuillez réessayer dans quelques instants.")
-    } finally {
-      setSending(false)
-    }
+${data.get('name')}
+${data.get('email')}`
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   }
 
   return (
@@ -56,8 +20,9 @@ export default function Contact() {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[0.85fr_1.15fr] gap-10 items-start">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">Nous contacter</p>
-            <h2 className="text-2xl md:text-3xl font-bold text-sky-950 mb-4">Parlons de votre prochain voyage</h2>
+            <p className="eyebrow mb-3">Nous contacter</p>
+            <h2 className="section-title mb-4">Parlons de votre prochain voyage</h2>
+            <div className="mb-6 h-0.5 w-16 bg-brand-red" />
             <p className="text-gray-600 leading-relaxed mb-8">
               Notre équipe vous accompagne pour choisir votre trajet, votre classe et vos options de voyage à Madagascar.
             </p>
@@ -67,38 +32,36 @@ export default function Contact() {
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">☎</span>
                 <span>
                   <span className="block text-sm text-gray-500">Téléphone / WhatsApp</span>
-                  <span className="font-semibold text-sky-950 group-hover:text-primary transition-colors">+261 37 37 370 01</span>
+                  <span className="font-semibold text-navy group-hover:text-primary transition-colors">+261 37 37 370 01</span>
                 </span>
               </a>
-              <a href="mailto:dircom@soatransplus.mg" className="flex items-start gap-4 group">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-start gap-4 group">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">✉</span>
                 <span>
                   <span className="block text-sm text-gray-500">Email</span>
-                  <span className="font-semibold text-sky-950 group-hover:text-primary transition-colors">dircom@soatransplus.mg</span>
+                  <span className="font-semibold text-navy group-hover:text-primary transition-colors">{CONTACT_EMAIL}</span>
                 </span>
               </a>
               <div className="flex items-start gap-4">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">⌖</span>
                 <span>
                   <span className="block text-sm text-gray-500">Notre agence</span>
-                  <span className="font-semibold text-sky-950">Antananarivo, Madagascar</span>
+                  <span className="font-semibold text-navy">Antananarivo, Madagascar</span>
                 </span>
               </div>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
-            <h3 className="text-xl font-bold text-sky-950 mb-6">Envoyez-nous un message</h3>
+          <form onSubmit={handleSubmit} className="bg-white border border-slate-200 p-6 md:p-10">
+            <h3 className="font-serif text-2xl font-medium text-navy mb-6">Envoyez-nous un message</h3>
             <div className="grid sm:grid-cols-2 gap-4 mb-4">
               <input required name="name" placeholder="Votre nom" className="w-full border border-slate-200 rounded-md p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
               <input required type="email" name="email" placeholder="Votre email" className="w-full border border-slate-200 rounded-md p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
             </div>
             <input name="subject" placeholder="Sujet" className="w-full border border-slate-200 rounded-md p-3 text-sm mb-4 focus:outline-none focus:ring-2 focus:ring-primary/30" />
             <textarea required name="message" rows={5} placeholder="Comment pouvons-nous vous aider ?" className="w-full border border-slate-200 rounded-md p-3 text-sm mb-4 resize-y focus:outline-none focus:ring-2 focus:ring-primary/30" />
-            {sent && <p className="text-sm text-green-700 bg-green-50 rounded-md p-3 mb-4">Votre message a bien été préparé. Notre équipe vous répondra rapidement.</p>}
-            {error && <p className="text-sm text-red-700 bg-red-50 rounded-md p-3 mb-4">{error}</p>}
-            <button type="submit" disabled={sending} className="w-full sm:w-auto bg-primary text-white px-6 py-3 rounded-md font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50">
-              {sending ? 'Envoi en cours...' : 'Envoyer le message'}
+            <button type="submit" className="btn-solid w-full sm:w-auto">
+              Envoyer le message
             </button>
           </form>
         </div>

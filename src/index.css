@@ -5,12 +5,12 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 214 60% 12%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
+    --primary: 213 75% 47%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -22,7 +22,7 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
+    --ring: 213 75% 47%;
     --radius: 0.5rem;
   }
 
@@ -54,7 +54,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Fira Sans', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
   }
 
   html {
@@ -97,3 +97,76 @@
 .bg-c2 {
   background-color: #f1f5f9;
 }
+
+/* ===== Design éditorial (inspiré de vanilla-islands.org) ===== */
+@layer base {
+  h1, h2, h3 {
+    font-family: 'Fira Sans Condensed', 'Fira Sans', sans-serif;
+    font-weight: 600;
+  }
+}
+
+.eyebrow {
+  @apply text-xs font-semibold uppercase text-brand-red;
+  letter-spacing: 0.28em;
+}
+
+.section-title {
+  @apply font-serif text-3xl md:text-4xl font-medium text-navy;
+}
+
+.title-rule {
+  @apply mx-auto mt-5 h-0.5 w-16 bg-brand-red;
+}
+
+.link-more {
+  @apply inline-flex items-center gap-2 border-b border-primary pb-1 text-xs font-semibold uppercase text-primary transition-all;
+  letter-spacing: 0.2em;
+}
+.link-more:hover {
+  @apply gap-3 text-navy border-navy;
+}
+
+.btn-flat {
+  @apply inline-flex items-center justify-center gap-2 border px-7 py-3.5 text-xs font-semibold uppercase transition-colors cursor-pointer;
+  letter-spacing: 0.2em;
+}
+.btn-solid {
+  @apply btn-flat border-primary bg-primary text-white hover:bg-navy hover:border-navy;
+}
+.btn-outline-light {
+  @apply btn-flat border-white text-white hover:bg-white hover:text-navy;
+}
+
+.wave-divider {
+  height: 40px;
+  background-repeat: repeat-x;
+  background-size: 80px 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 40' preserveAspectRatio='none'%3E%3Cpath d='M0 40V20c13 0 13-12 26-12s13 12 27 12 13-12 27-12v32z' fill='%23ffffff'/%3E%3C/svg%3E");
+}
+
+/* Carte façon vanilla-islands : photo, titre, description italique, lien, barre colorée */
+.card-iv {
+  @apply relative flex flex-col bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  --bar: #1E6FD0;
+}
+.card-iv::after {
+  content: '';
+  @apply absolute inset-x-0 bottom-0 h-2;
+  background: var(--bar);
+}
+.card-iv:nth-child(6n+1) { --bar: #1E6FD0; }
+.card-iv:nth-child(6n+2) { --bar: #D43D2F; }
+.card-iv:nth-child(6n+3) { --bar: #3B8BE0; }
+.card-iv:nth-child(6n+4) { --bar: #E5604F; }
+.card-iv:nth-child(6n+5) { --bar: #155AA8; }
+.card-iv:nth-child(6n+6) { --bar: #B2322A; }
+.card-iv .card-img { @apply aspect-[3/2] w-full overflow-hidden; }
+.card-iv .card-img img, .card-iv .card-img > div { @apply h-full w-full object-cover transition-transform duration-700; }
+.card-iv:hover .card-img img, .card-iv:hover .card-img > div { @apply scale-105; }
+.card-iv .card-body { @apply flex flex-1 flex-col px-5 pb-7 pt-4; }
+.card-iv .card-title { @apply font-serif text-xl font-medium text-navy; }
+.card-iv .card-desc { @apply mt-1 text-sm italic leading-snug text-gray-600; }
+.card-iv .card-link { @apply mt-5 text-sm font-medium uppercase text-navy; }
+.card-iv:hover .card-title { @apply text-primary; }
+.card-iv:hover .card-link { @apply text-brand-red; }

@@ -21,6 +21,8 @@ import busTouristique from '../assets/images/BusTouristique.jpg'
 import busTouristiqueAlt from '../assets/images/bustouristique_.jpg'
 import tanaStaff from '../assets/images/tana-staff.jpg'
 import orangeIcon from '../assets/images/orange.webp'
+import vehicle1 from '../assets/images/1.jpeg'
+import vehicle3 from '../assets/images/3.jpeg'
 
 const imageMap: Record<string, string> = {
   'avenue-baobab.jpg': avenueBaobab,
@@ -45,6 +47,8 @@ const imageMap: Record<string, string> = {
   'bustouristique_.jpg': busTouristiqueAlt,
   'tana-staff.jpg': tanaStaff,
   'orange.webp': orangeIcon,
+  '1.jpeg': vehicle1,
+  '3.jpeg': vehicle3,
 }
 
 export function resolveImage(filename: string | null | undefined): string {

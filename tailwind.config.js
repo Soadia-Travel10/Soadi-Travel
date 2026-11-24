@@ -18,8 +18,11 @@ export default {
         sans: ['ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
         pacifico: ['Pacifico', 'cursive'],
+        serif: ['Fira Sans Condensed', 'Fira Sans', 'sans-serif'],
       },
       colors: {
+        navy: '#0B2A4F',
+        brand: { red: '#D43D2F', 'red-dark': '#B2322A', blue: '#1E6FD0' },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
