@@ -21,3 +21,6 @@ npm run preview
 ```
 
 Les images sont intégrées comme assets Vite dans `src/assets/images/`.
+
+
+Location de voiture à Madagascar

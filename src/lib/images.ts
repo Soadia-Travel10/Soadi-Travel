@@ -22,7 +22,18 @@ import busTouristiqueAlt from '../assets/images/bustouristique_.jpg'
 import tanaStaff from '../assets/images/tana-staff.jpg'
 import vehicle1 from '../assets/images/1.jpeg'
 import vehicle3 from '../assets/images/3.jpeg'
+import vehicle2 from '../assets/images/2.jpeg'
+import vehicle4 from '../assets/images/4.jpeg'
+import vehicle5 from '../assets/images/5.jpeg'
+import vehicle6 from '../assets/images/6.jpeg'
+import vehicle7 from '../assets/images/7.jpeg'
 import vehicle8 from '../assets/images/8.jpeg'
+import vehicle24 from '../assets/images/24.jpeg'
+import vehicle25 from '../assets/images/25.jpeg'
+import vehicle26 from '../assets/images/26.jpeg'
+import vehicle27 from '../assets/images/27.jpeg'
+import vehicle28 from '../assets/images/28.jpeg'
+import vehicle29 from '../assets/images/29.jpeg'
 import partnerOrange from '../assets/images/16.jpg'
 import partnerAria from '../assets/images/17.jpeg'
 import partner18 from '../assets/images/18.png'
@@ -55,7 +66,18 @@ const imageMap: Record<string, string> = {
   'tana-staff.jpg': tanaStaff,
   '1.jpeg': vehicle1,
   '3.jpeg': vehicle3,
+  '2.jpeg': vehicle2,
+  '4.jpeg': vehicle4,
+  '5.jpeg': vehicle5,
+  '6.jpeg': vehicle6,
+  '7.jpeg': vehicle7,
   '8.jpeg': vehicle8,
+  '24.jpeg': vehicle24,
+  '25.jpeg': vehicle25,
+  '26.jpeg': vehicle26,
+  '27.jpeg': vehicle27,
+  '28.jpeg': vehicle28,
+  '29.jpeg': vehicle29,
   '16.jpg': partnerOrange,
   '17.jpeg': partnerAria,
   '18.png': partner18,

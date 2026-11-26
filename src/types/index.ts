@@ -19,6 +19,10 @@ export interface VehicleType {
   nom: string
   type: string | null
   image: string | null
+  photos?: string[]
+  description?: string
+  capacity?: string
+  features?: string[]
   created_at: string
 }
 

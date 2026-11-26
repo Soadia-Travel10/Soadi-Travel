@@ -16,9 +16,27 @@ export const implementations: NosImplementation[] = [
 ]
 
 export const vehicles: VehicleType[] = [
-  { id: 'v1', nom: 'Bus touristique', type: 'Bus', image: '1.jpeg', created_at },
-  { id: 'v2', nom: 'Minivan', type: 'Minivan', image: '3.jpeg', created_at },
-  { id: 'v3', nom: 'SUV & PICKUP', type: 'SUV & PICKUP', image: '8.jpeg', created_at },
+  {
+    id: 'v1', nom: 'Bus touristique', type: 'Bus', image: '1.jpeg', created_at,
+    photos: ['24.jpeg', '25.jpeg', '26.jpeg', '27.jpeg', '28.jpeg', '29.jpeg'],
+    description: "Un autocar confortable et entretenu, pensé pour les voyages en groupe et les circuits à travers Madagascar.",
+    features: ['Idéal pour les groupes', 'Grandes vitres panoramiques', 'Adapté aux longs trajets'],
+    // capacity: '... places',
+  },
+  {
+    id: 'v2', nom: 'Minivan', type: 'Minivan', image: '3.jpeg', created_at,
+    photos: ['3.jpeg', '5.jpeg', '7.jpeg'],
+    description: "Un minivan pratique pour les petits groupes, les transferts et les excursions.",
+    features: ['Idéal pour les petits groupes', 'Porte latérale coulissante', 'Galerie de toit pour les bagages'],
+    // capacity: '... places',
+  },
+  {
+    id: 'v3', nom: 'SUV & PICKUP', type: 'SUV & PICKUP', image: '8.jpeg', created_at,
+    photos: ['8.jpeg'],
+    description: "Des 4x4 et pick-up pour vos déplacements privés et vos découvertes à travers le pays.",
+    features: ['Idéal pour les déplacements privés', 'Adapté aux voyages en petit comité'],
+    // capacity: '... places',
+  },
 ]
 
 export const partners: Partenaire[] = [

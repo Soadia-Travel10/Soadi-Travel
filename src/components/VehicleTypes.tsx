@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import type { VehicleType } from '../types'
 import { resolveImage } from '../lib/images'
+import VehicleModal from './VehicleModal'
 
 export default function VehicleTypes({ vehicles }: { vehicles: VehicleType[] }) {
   const [showAll, setShowAll] = useState(false)
+  const [selected, setSelected] = useState<VehicleType | null>(null)
   const visibleVehicles = showAll ? vehicles : vehicles.slice(0, 3)
 
   return (
@@ -37,10 +39,18 @@ export default function VehicleTypes({ vehicles }: { vehicles: VehicleType[] }) 
                   <span className="h-2 w-2 rounded-full bg-emerald-500" />
                   Disponible pour vos réservations
                 </p>
-                <a href="#contact" className="link-more mt-6 w-fit">
-                  Réserver <span>→</span>
-                </a>
+                <span className="link-more mt-6 w-fit">
+                  Voir les détails <span>→</span>
+                </span>
               </div>
+              {/* Bouton étendu : toute la carte est cliquable, aussi au clavier */}
+              <button
+                type="button"
+                onClick={() => setSelected(vehicle)}
+                aria-haspopup="dialog"
+                aria-label={`Voir les détails : ${vehicle.nom}`}
+                className="absolute inset-0 z-10 cursor-pointer focus-visible:outline focus-visible:outline-4 focus-visible:outline-brand-red"
+              />
             </article>
           ))}
         </div>
@@ -54,6 +64,7 @@ export default function VehicleTypes({ vehicles }: { vehicles: VehicleType[] }) 
           <p className="text-center text-sm text-white/70">Aucun véhicule disponible pour le moment.</p>
         )}
       </div>
+      {selected && <VehicleModal vehicle={selected} onClose={() => setSelected(null)} />}
     </section>
   )
 }

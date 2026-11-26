@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import logo from '../assets/images/logo.png'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -48,7 +49,10 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex min-h-16 items-center justify-between gap-4">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center gap-3">
+              <span className="flex h-[72px] w-[72px] shrink-0 sm:h-24 sm:w-24 items-center justify-center rounded-full bg-white p-0.5 shadow-md">
+                <img src={logo} alt="" className="h-full w-full object-contain" />
+              </span>
               <span className={`flex flex-col leading-none ${solid ? 'text-navy' : 'text-white'}`}>
                 <span className="font-serif text-2xl font-bold tracking-wide">Soadia Travel</span>
                 <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.5em] opacity-80">Madagascar</span>
