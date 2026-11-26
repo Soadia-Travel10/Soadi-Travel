@@ -28,7 +28,7 @@ export default function VehicleTypes({ vehicles }: { vehicles: VehicleType[] }) 
               className="card-iv group w-full sm:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)]"
             >
               <div className="card-img relative">
-                <img src={resolveImage(vehicle.image)} alt={vehicle.nom} />
+                <img src={resolveImage(vehicle.image)} alt={vehicle.nom} loading="lazy" />
                 <span className="absolute left-0 top-4 bg-brand-red px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white">
                   {vehicle.type || 'Véhicule'}
                 </span>

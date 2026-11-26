@@ -1,11 +1,11 @@
 import React from 'react'
-import bannerImage from '../assets/images/2.jpeg'
+import bannerImage from '../assets/images/2.webp'
 
 export default function CtaBanner() {
   return (
     <section id="pricing" className="relative py-36">
       <div className="absolute inset-0 z-0">
-        <img src={bannerImage} alt="Autocar devant la gare" className="w-full h-full object-cover object-[center_85%]" />
+        <img src={bannerImage} alt="Autocar devant la gare" loading="lazy" className="w-full h-full object-cover object-[center_85%]" />
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
       <div className="container relative z-10 mx-auto px-4 text-center">

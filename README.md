@@ -20,6 +20,9 @@ npm run build
 npm run preview
 ```
 
+`npm run build` génère aussi le HTML de la page d'accueil à l'avance (pré-rendu, voir `scripts/prerender.mjs`).
+Les fichiers SEO (`robots.txt`, `sitemap.xml`, image de partage) sont dans `public/`.
+
 Les images sont intégrées comme assets Vite dans `src/assets/images/`.
 
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import avenueBaobab from '../assets/images/avenue-baobab.jpg'
+import avenueBaobab from '../assets/images/avenue-baobab.webp'
 
 const WAVE_HEIGHT = 120
 
@@ -45,6 +45,9 @@ export default function Hero() {
       <div className="container relative z-10 mx-auto max-w-6xl px-6">
         <h1 className="animate-fade-in-up font-serif text-4xl font-bold leading-tight text-white md:text-6xl">
           Soadia Travel
+          <span className="mt-3 block text-2xl font-semibold md:text-3xl">
+            Bus et location de véhicules à Madagascar
+          </span>
         </h1>
         <p className="animate-fade-in-up mt-3 max-w-2xl font-serif text-lg font-semibold text-white md:text-xl" style={{ animationDelay: '0.15s' }}>
           Explorez Madagascar en autocar : réservez vos trajets, découvrez de nouveaux itinéraires et

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import aboutImage1 from '../assets/images/4.jpeg'
-import aboutImage2 from '../assets/images/31.jpeg'
+import aboutImage1 from '../assets/images/4.webp'
+import aboutImage2 from '../assets/images/31.webp'
 
 const slides = [aboutImage1, aboutImage2]
 const DELAY = 4000 // durée d'affichage de chaque image en ms
@@ -32,6 +32,7 @@ export default function About() {
               <img
                 key={slide}
                 src={slide}
+                loading="lazy"
                 alt={`Voyage avec Soadia Travel, photo ${i + 1}`}
                 aria-hidden={i !== current}
                 className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ${

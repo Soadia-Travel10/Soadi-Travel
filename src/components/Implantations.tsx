@@ -5,7 +5,6 @@ import { resolveImage } from '../lib/images'
 export default function Implantations({ cities }: { cities: NosImplementation[] }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [showAll, setShowAll] = useState(false)
-  const visibleCities = showAll ? cities : cities.slice(0, 6)
 
   return (
     <section id="location" className="bg-c1 py-10">
@@ -22,10 +21,10 @@ export default function Implantations({ cities }: { cities: NosImplementation[] 
       </div>
       <div className="relative">
         <div ref={scrollRef} className="container mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 sm:grid-cols-2 lg:grid-cols-3">
-          {visibleCities.map((city) => (
-            <article key={city.id} className="card-iv">
+          {cities.map((city, i) => (
+            <article key={city.id} className={`card-iv ${!showAll && i >= 6 ? '!hidden' : ''}`}>
               <div className="card-img relative">
-                <img src={resolveImage(city.image)} alt={city.nom} />
+                <img src={resolveImage(city.image)} alt={`Agence Soadia Travel à ${city.nom}`} loading="lazy" />
                 <span className="absolute left-0 top-0 bg-primary px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white">
                   {city.categorie || 'Implantation'}
                 </span>
