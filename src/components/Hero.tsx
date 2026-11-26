@@ -47,7 +47,7 @@ export default function Hero() {
           Soadia Travel
         </h1>
         <p className="animate-fade-in-up mt-3 max-w-2xl font-serif text-lg font-semibold text-white md:text-xl" style={{ animationDelay: '0.15s' }}>
-          Explorez Madagascar en bus : réservez vos trajets, découvrez de nouveaux itinéraires et
+          Explorez Madagascar en autocar : réservez vos trajets, découvrez de nouveaux itinéraires et
           voyagez avec confort et sécurité.
         </p>
         <div className="mt-8 flex flex-wrap gap-4">

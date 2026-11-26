@@ -170,3 +170,19 @@
 .card-iv .card-link { @apply mt-5 text-sm font-medium uppercase text-navy; }
 .card-iv:hover .card-title { @apply text-primary; }
 .card-iv:hover .card-link { @apply text-brand-red; }
+
+/* Bande de partenaires : défilement continu en boucle */
+@keyframes partners-loop {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.partners-track {
+  animation: partners-loop linear infinite;
+}
+.partners-marquee:hover .partners-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .partners-marquee { overflow-x: auto; }
+  .partners-track { animation: none; }
+}

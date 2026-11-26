@@ -8,7 +8,7 @@ export default function Implantations({ cities }: { cities: NosImplementation[] 
   const visibleCities = showAll ? cities : cities.slice(0, 6)
 
   return (
-    <section id="location" className="mt-16 bg-c1 py-16">
+    <section id="location" className="bg-c1 py-10">
       <div className="container mx-auto px-4 mb-4">
         <div className="max-w-4xl mx-auto text-center">
           <p className="eyebrow mb-3">Nos agences</p>

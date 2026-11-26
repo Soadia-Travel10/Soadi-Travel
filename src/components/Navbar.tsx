@@ -21,8 +21,8 @@ export default function Navbar() {
   const solid = scrolled || !isHome
   const navLinks = [
     { href: '/#about', label: 'Pourquoi Nous?' },
-    { href: '/#location', label: 'Destinations' },
     { href: '/#vehicles', label: 'Véhicules' },
+    { href: '/#location', label: 'Destinations' },
     { href: '/#contact', label: 'Contact' },
   ]
 

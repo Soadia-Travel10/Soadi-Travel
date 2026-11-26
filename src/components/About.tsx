@@ -27,8 +27,7 @@ export default function About() {
           <p className="mb-8 leading-relaxed text-gray-600">
             <b className="text-navy">Soadia Travel</b> vous offre une expérience de voyage fiable,
             confortable et accessible à travers Madagascar : un service client attentif, une
-            réservation facile et une flotte moderne pour tous vos déplacements, en ville comme à la
-            campagne.
+            réservation facile et une flotte moderne pour tous vos déplacements.
           </p>
           <ul className="mb-9 space-y-4">
             {points.map((item) => (
