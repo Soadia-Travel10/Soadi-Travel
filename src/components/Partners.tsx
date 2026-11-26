@@ -17,7 +17,7 @@ export default function Partners({ partners }: { partners: Partenaire[] }) {
       <div className="container mx-auto px-6">
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <p className="eyebrow mb-3">Ils nous font confiance</p>
-          <h2 className="section-title">Nos partenaires</h2>
+          <h2 className="section-title">Nos partenaires et clients</h2>
           <div className="title-rule mb-6" />
           <p className="leading-relaxed text-gray-600">
             Des partenaires de confiance qui contribuent à rendre chaque voyage plus simple et plus
