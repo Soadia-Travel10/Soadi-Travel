@@ -47,4 +47,5 @@ export const partners: Partenaire[] = [
   { id: 'p5', nom: 'Mada Sky Tours', image: '20.png', created_at },
   { id: 'p6', nom: 'Madagas Tours', image: '21.png', created_at },
   { id: 'p7', nom: 'Madaverte Groupe', image: '22.png', created_at },
+  { id: 'p8', nom: 'Antsanitia Resort', image: '32.png', created_at },
 ]
