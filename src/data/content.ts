@@ -25,7 +25,7 @@ export const vehicles: VehicleType[] = [
   },
   {
     id: 'v2', nom: 'Minivan', type: 'Minivan', image: '3.jpeg', created_at,
-    photos: ['3.jpeg', '5.jpeg', '7.jpeg'],
+    photos: ['3.jpeg', '5.jpeg', '7.jpeg', '33.jpeg'],
     description: "Un minivan pratique pour les petits groupes, les transferts et les excursions.",
     features: ['Idéal pour les petits groupes', 'Porte latérale coulissante', 'Galerie de toit pour les bagages'],
     // capacity: '... places',

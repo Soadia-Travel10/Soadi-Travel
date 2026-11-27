@@ -42,6 +42,7 @@ import partner20 from '../assets/images/20.webp'
 import partner21 from '../assets/images/21.webp'
 import partner22 from '../assets/images/22.webp'
 import partner32 from '../assets/images/32.png'
+import vehicle33 from '../assets/images/33.jpeg'
 
 const imageMap: Record<string, string> = {
   'avenue-baobab.jpg': avenueBaobab,
@@ -87,6 +88,7 @@ const imageMap: Record<string, string> = {
   '21.png': partner21,
   '22.png': partner22,
   '32.png': partner32,
+  '33.jpeg': vehicle33,
 }
 
 export function resolveImage(filename: string | null | undefined): string {
