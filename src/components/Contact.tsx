@@ -32,7 +32,7 @@ ${data.get('email')}`
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">☎</span>
                 <span>
                   <span className="block text-sm text-gray-500">Téléphone / WhatsApp</span>
-                  <span className="font-semibold text-navy group-hover:text-primary transition-colors">+261 37 37 370 01</span>
+                  <span className="font-semibold text-navy group-hover:text-primary transition-colors">+261 32 11 924 96</span>
                 </span>
               </a>
               <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-start gap-4 group">

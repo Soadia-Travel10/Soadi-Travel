@@ -46,7 +46,7 @@ export default function Hero() {
         <h1 className="animate-fade-in-up font-serif text-4xl font-bold leading-tight text-white md:text-6xl">
           Soadia Travel
           <span className="mt-3 block text-2xl font-semibold md:text-3xl">
-            Bus et location de véhicules à Madagascar
+            Service de  location de véhicules à Madagascar
           </span>
         </h1>
         <p className="animate-fade-in-up mt-3 max-w-2xl font-serif text-lg font-semibold text-white md:text-xl" style={{ animationDelay: '0.15s' }}>

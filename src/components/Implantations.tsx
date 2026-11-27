@@ -32,7 +32,7 @@ export default function Implantations({ cities }: { cities: NosImplementation[] 
               <div className="card-body">
                 <h3 className="card-title">{city.nom}</h3>
                 <p className="card-desc">{city.description || 'Découvrez notre implantation avec Soadia Travel.'}</p>
-                <span className="card-link">En savoir plus →</span>
+                
               </div>
             </article>
           ))}

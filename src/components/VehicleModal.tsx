@@ -168,7 +168,7 @@ export default function VehicleModal({ vehicle, onClose }: Props) {
               Réserver ce véhicule
             </a>
             <a href="tel:+261373737001" className="text-center text-sm text-gray-500 transition-colors hover:text-primary">
-              ou appelez le <span className="font-semibold text-navy">+261 37 37 370 01</span>
+              ou appelez le <span className="font-semibold text-navy">+261 32 11 924 96</span>
             </a>
           </div>
         </div>

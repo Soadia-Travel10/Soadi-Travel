@@ -6,8 +6,8 @@ const slides = [aboutImage1, aboutImage2]
 const DELAY = 4000 // durée d'affichage de chaque image en ms
 
 const points = [
-  'Réservation en ligne facile et disponibilité des sièges en temps réel',
-  'Des autobus sûrs et bien entretenus',
+  'Réservation facile pour vos voyages groupés ou individuels',
+  'Des autocars modernes et bien entretenus',
   'Support client amical et confirmations instantanées',
 ]
 
@@ -63,8 +63,7 @@ export default function About() {
           <div className="mb-6 mt-5 h-0.5 w-16 bg-brand-red" />
           <p className="mb-8 leading-relaxed text-gray-600">
             <b className="text-navy">Soadia Travel</b> vous offre une expérience de voyage fiable,
-            confortable et accessible à travers Madagascar : un service client attentif, une
-            réservation facile et une flotte moderne pour tous vos déplacements.
+            confortable et accessible à travers Madagascar : un service client attentif, une qualité de service reconnue et une flotte moderne pour tous vos déplacements.
           </p>
           <ul className="mb-9 space-y-4">
             {points.map((item) => (

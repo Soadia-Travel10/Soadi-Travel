@@ -20,14 +20,14 @@ export const vehicles: VehicleType[] = [
     id: 'v1', nom: 'Bus touristique', type: 'Bus', image: '1.jpeg', created_at,
     photos: ['24.jpeg', '25.jpeg', '26.jpeg', '27.jpeg', '28.jpeg', '29.jpeg'],
     description: "Un autocar confortable et entretenu, pensé pour les voyages en groupe et les circuits à travers Madagascar.",
-    features: ['Idéal pour les groupes', 'Grandes vitres panoramiques', 'Adapté aux longs trajets'],
+    features: ['Idéal pour les groupes', 'Grandes vitres panoramiques', 'Adapté aux longs trajets', 'Climatisé et wifi à bord'],
     // capacity: '... places',
   },
   {
     id: 'v2', nom: 'Minivan', type: 'Minivan', image: '3.jpeg', created_at,
     photos: ['3.jpeg', '5.jpeg', '7.jpeg', '33.jpeg', '34.jpeg'],
     description: "Un minivan pratique pour les petits groupes, les transferts et les excursions.",
-    features: ['Idéal pour les petits groupes', 'Porte latérale coulissante', 'Galerie de toit pour les bagages'],
+    features: ['Idéal pour les petits groupes', 'Porte latérale coulissante', 'Galerie de toit pour les bagages', 'Climatisé et wifi à bord'],
     // capacity: '... places',
   },
   {
