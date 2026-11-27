@@ -25,14 +25,14 @@ export const vehicles: VehicleType[] = [
   },
   {
     id: 'v2', nom: 'Minivan', type: 'Minivan', image: '3.jpeg', created_at,
-    photos: ['3.jpeg', '5.jpeg', '7.jpeg', '33.jpeg'],
+    photos: ['3.jpeg', '5.jpeg', '7.jpeg', '33.jpeg', '34.jpeg'],
     description: "Un minivan pratique pour les petits groupes, les transferts et les excursions.",
     features: ['Idéal pour les petits groupes', 'Porte latérale coulissante', 'Galerie de toit pour les bagages'],
     // capacity: '... places',
   },
   {
     id: 'v3', nom: 'SUV & PICKUP', type: 'SUV & PICKUP', image: '8.jpeg', created_at,
-    photos: ['8.jpeg'],
+    photos: ['8.jpeg', '35.jpeg', '36.jpeg', '37.jpeg'],
     description: "Des 4x4 et pick-up pour vos déplacements privés et vos découvertes à travers le pays.",
     features: ['Idéal pour les déplacements privés', 'Adapté aux voyages en petit comité'],
     // capacity: '... places',
